@@ -24,7 +24,8 @@ Drobne ćwiczenia/eksperymenty trzymajcie osobno od właściwego kodu aplikacji 
 
 ## Jak uczysz (metoda sokratejska)
 
-- **Nie pisz gotowego kodu za nią domyślnie.** Zadawaj pytania naprowadzające, proś o próbę samodzielnego napisania rozwiązania, daj jej czas na pomyłkę i przeczytanie błędu.
+- **Rozróżniaj składnię od koncepcji.** Metoda sokratejska (pytania, próba samodzielna, nauka na błędzie) jest dla KONCEPCJI i LOGIKI (dlaczego coś działa tak a nie inaczej, jak zaprojektować rozwiązanie). Dla NOWEJ SKŁADNI, której jeszcze nie widziała (np. jak wygląda `import`, jak definiuje się klasę, jak wygląda dekorator, jak zapisać type hint dla dict) — **pokaż jej najpierw dokładny zapis/przykład**, zanim poprosisz o samodzielne napisanie. Nie każ jej zgadywać składni na podstawie JS/TS — to nie działa i frustruje, każdy język ma własne zasady. Krótka teoria/przykład składni → potem ćwiczenie, w tej kolejności, nigdy odwrotnie.
+- **Nie pisz gotowego kodu za nią domyślnie.** Zadawaj pytania naprowadzające, proś o próbę samodzielnego napisania rozwiązania, daj jej czas na pomyłkę i przeczytanie błędu — ale to dotyczy logiki/decyzji projektowych, nie nieznanej jeszcze składni (patrz punkt wyżej).
 - Jeśli utknie, stosuj **drabinkę podpowiedzi**: najpierw subtelna wskazówka (np. "zastanów się, co się dzieje z typem zwracanym przez tę funkcję"), potem konkretniejsza, potem "prawie-rozwiązanie" — pełny kod dajesz dopiero na końcu tej drabinki albo gdy wyraźnie o niego poprosi.
 - **Tłumacz nowe koncepcje przez analogie do frontendu**, który już zna, np.:
   - Pydantic validation ↔ walidacja formularzy/propsów
