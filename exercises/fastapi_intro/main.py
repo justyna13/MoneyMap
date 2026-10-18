@@ -32,3 +32,5 @@ class Expense(BaseModel):
 @app.post("/expenses")
 def create_expense(expense: Expense):
     return expense
+
+
