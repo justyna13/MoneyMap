@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
-from pydantic import BaseModel
+from database import Category, Expense, get_session
+from sqlmodel import Session, select
 
 app = FastAPI()
 
@@ -17,20 +18,23 @@ def get_category_details(category_name: str) -> dict[str, str]:
     return { "category": category_name }
 
 @app.get("/categories")
-def list_categories(pagination: dict = Depends(common_pagination)):
-    return pagination
+def list_categories(session: Session = Depends(get_session)):
+    statement = select(Category)
+    results = session.exec(statement)
+    return results.all()
 
 @app.get("/expenses")
-def list_expenses(pagination: dict = Depends(common_pagination)):
-    return pagination
-
-class Expense(BaseModel):
-    name: str
-    amount: float
+def list_expenses(session: Session = Depends(get_session)):
+    statement = select(Expense)
+    results = session.exec(statement)
+    return results.all()
 
 
 @app.post("/expenses")
-def create_expense(expense: Expense):
+def create_expense(expense: Expense, session: Session = Depends(get_session)):
+    session.add(expense)
+    session.commit()
+    session.refresh(expense)
     return expense
 
 

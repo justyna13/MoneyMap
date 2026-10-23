@@ -1,17 +1,5 @@
-from sqlmodel import SQLModel, create_engine, Session, Field, select
-
-class Category(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    name: str
-
-class Expense(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    amount: float
-    category_id: int = Field(foreign_key="category.id")
-
-
-engine = create_engine("sqlite:///database.db")
-
+from database import Category, Expense, engine
+from sqlmodel import SQLModel, Session, select
 
 
 def create_tables():
@@ -20,9 +8,12 @@ def create_tables():
 def seed_data():
     with Session(engine) as session:
         category = Category(name="food")
+        expense = Expense(amount=10.2, category=category)
         session.add(category)
+        session.add(expense)
         session.commit()
         session.refresh(category)
+        session.refresh(expense)
 
 def query_categories():
     with Session(engine) as session:
@@ -30,7 +21,15 @@ def query_categories():
         results = session.exec(statement)
         print(results.all())
 
+def query_category_with_expenses(category_name: str):
+    with Session(engine) as session:
+        statement = select(Category).where(Category.name == category_name)
+        result = session.exec(statement).first()
+        if result:
+            print(category_name, result.expenses)
+
 if __name__ == "__main__":
     create_tables()
-    seed_data()
-    query_categories()
+    # seed_data()
+    # query_categories()
+    query_category_with_expenses("food")
