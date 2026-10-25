@@ -11,6 +11,7 @@ class Expense(SQLModel, table=True):
     amount: float
     category_id: int = Field(foreign_key="category.id")
     category: Category = Relationship(back_populates="expenses")
+    date: str | None = None
 
 
 engine = create_engine("sqlite:///database.db")
